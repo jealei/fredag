@@ -22,7 +22,7 @@ function App() {
     return () => {
       clearInterval(intervalId);
     };
-  }, [isPlaying]);
+  }, []);
 
   return (
     <Fragment>
