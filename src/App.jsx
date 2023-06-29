@@ -42,7 +42,7 @@ function App() {
         ></iframe>
       </div>
       <footer className="footer">
-        <p>&copy; {currentYear} Your Company. All rights reserved.</p>
+        <p>&copy; {currentYear} Chris November. All rights reserved.</p>
       </footer>
     </Fragment>
   );
