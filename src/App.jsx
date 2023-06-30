@@ -109,6 +109,7 @@ function App() {
           ></iframe>
         </div>
       </div>
+
       <footer className="footer">
         <p>&copy; {currentYear} Chris November. All rights reserved.</p>
       </footer>
