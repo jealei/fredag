@@ -3,8 +3,7 @@ import "./App.css";
 
 function App() {
   const [currentYear, setCurrentYear] = useState(2023);
-  const [isWeekend, setIsWeekend] = useState(false);
-  const [countdown, setCountdown] = useState("0d 0t 0m");
+  const [isWeekend, setIsWeekend] = useState(null);
   const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
@@ -39,8 +38,6 @@ function App() {
         minutesRemaining -= 1;
       }
 
-      const countdownText = `${daysRemaining}d ${hoursRemaining}t ${minutesRemaining}m ${secondsRemaining}s`;
-      setCountdown(countdownText);
       setTimeRemaining({
         days: daysRemaining,
         hours: hoursRemaining,
@@ -64,6 +61,22 @@ function App() {
       clearInterval(intervalId);
     };
   }, []);
+
+  if (isWeekend === null || isWeekend === undefined) {
+    return (
+      <Fragment>
+        <div className="container">
+          <h1 className="title">Er det helg?</h1>
+          <div className="missing-content"></div>
+          <div className="video-container"></div>
+        </div>
+
+        <footer className="footer">
+          <p>&copy; {currentYear} Chris November. All rights reserved.</p>
+        </footer>
+      </Fragment>
+    );
+  }
 
   return (
     <Fragment>

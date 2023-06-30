@@ -118,8 +118,17 @@ body {
   height: 100%;
 }
 
+.missing-content {
+  height: 450px; /* Adjust the height as per your needs */
+  /* Add any other desired styles */
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
+  .missing-content {
+    height: 230px; /* Adjust the height as per your needs */
+    /* Add any other desired styles */
+  }
   .countdown-value {
     font-size: 2rem;
   }
