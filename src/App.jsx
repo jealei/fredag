@@ -11,10 +11,16 @@ function App() {
       const currentDay = currentDate.getDay();
       const currentHour = currentDate.getHours();
       const currentYear = currentDate.getFullYear();
+      const currentMinute = currentDate.getMinutes();
 
       setCurrentYear(currentYear);
 
-      if (currentDay === 5 && currentHour >= 16) {
+      if (
+        (currentDay === 5 && currentHour >= 16) || // Friday after 4 PM
+        currentDay === 6 || // Saturday
+        (currentDay === 0 && currentHour < 23) || // Sunday before 11:59 PM
+        (currentDay === 0 && currentHour === 23 && currentMinute <= 59)
+      ) {
         setIsWeekend(true);
       } else setIsWeekend(false);
     }, 1000);
