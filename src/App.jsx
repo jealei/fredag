@@ -5,57 +5,67 @@ import Confetti from "react-confetti";
 function App() {
   const [currentYear, setCurrentYear] = useState(2023);
   const [isWeekend, setIsWeekend] = useState(null);
-  const [timeRemaining, setTimeRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeRemaining, setTimeRemaining] = useState(null);
 
+  const calculateTimeRemaining = () => {
+    const currentDate = Date.now();
+    const currentDay = new Date(currentDate).getDay();
+    const currentHour = new Date(currentDate).getHours();
+    const currentYear = new Date(currentDate).getFullYear();
+    const currentMinute = new Date(currentDate).getMinutes();
+    const currentSecond = new Date(currentDate).getSeconds();
+    const targetDay = 5;
+    const targetHour = 15;
+
+    let daysRemaining = targetDay - currentDay;
+    let hoursRemaining = targetHour - currentHour;
+    let minutesRemaining = 59 - currentMinute;
+    let secondsRemaining = 59 - currentSecond;
+
+    if (daysRemaining < 0) {
+      daysRemaining += 7;
+    }
+    if (hoursRemaining < 0) {
+      hoursRemaining += 24;
+      daysRemaining -= 1;
+    }
+    if (minutesRemaining < 0) {
+      minutesRemaining += 60;
+      hoursRemaining -= 1;
+    }
+    if (secondsRemaining < 0) {
+      secondsRemaining += 60;
+      minutesRemaining -= 1;
+    }
+    return {
+      days: daysRemaining,
+      hours: hoursRemaining,
+      minutes: minutesRemaining,
+      seconds: secondsRemaining,
+    };
+  };
+
+  const determineIsWeekend = () => {
+    const currentDate = Date.now();
+    const currentDay = new Date(currentDate).getDay();
+    const currentHour = new Date(currentDate).getHours();
+    const currentMinute = new Date(currentDate).getMinutes();
+
+    return (
+      (currentDay === 5 && currentHour >= 16) || // Friday after 4 PM
+      currentDay === 6 || // Saturday
+      (currentDay === 0 && currentHour < 23) || // Sunday before 11:59 PM
+      (currentDay === 0 && currentHour === 23 && currentMinute <= 59)
+    );
+  };
   useEffect(() => {
+    setTimeRemaining(calculateTimeRemaining());
+    setCurrentYear(new Date().getFullYear());
+    setIsWeekend(determineIsWeekend());
+
     const intervalId = setInterval(() => {
-      const currentDate = new Date();
-      const currentDay = currentDate.getDay();
-      const currentHour = currentDate.getHours();
-      const currentYear = currentDate.getFullYear();
-      const currentMinute = currentDate.getMinutes();
-      const currentSecond = currentDate.getSeconds();
-      const targetDay = 5;
-      const targetHour = 15;
-
-      let daysRemaining = targetDay - currentDay;
-      let hoursRemaining = targetHour - currentHour;
-      let minutesRemaining = 59 - currentMinute;
-      let secondsRemaining = 59 - currentSecond;
-
-      if (daysRemaining < 0) {
-        daysRemaining += 7;
-      }
-      if (hoursRemaining < 0) {
-        hoursRemaining += 24;
-        daysRemaining -= 1;
-      }
-      if (minutesRemaining < 0) {
-        minutesRemaining += 60;
-        hoursRemaining -= 1;
-      }
-      if (secondsRemaining < 0) {
-        secondsRemaining += 60;
-        minutesRemaining -= 1;
-      }
-
-      setTimeRemaining({
-        days: daysRemaining,
-        hours: hoursRemaining,
-        minutes: minutesRemaining,
-        seconds: secondsRemaining,
-      });
-
-      setCurrentYear(currentYear);
-
-      if (
-        (currentDay === 5 && currentHour >= 16) || // Friday after 4 PM
-        currentDay === 6 || // Saturday
-        (currentDay === 0 && currentHour < 23) || // Sunday before 11:59 PM
-        (currentDay === 0 && currentHour === 23 && currentMinute <= 59)
-      ) {
-        setIsWeekend(true);
-      } else setIsWeekend(false);
+      setTimeRemaining(calculateTimeRemaining());
+      setIsWeekend(determineIsWeekend());
     }, 1000);
 
     return () => {
@@ -91,7 +101,7 @@ function App() {
         ) : (
           <p className="no">Nei</p>
         )}
-        {!isWeekend && (
+        {!isWeekend && timeRemaining && (
           <div className="countdown">
             <p className="countdown-text">Det er helg om:</p>
             <div className="countdown-time">
