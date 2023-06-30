@@ -16,7 +16,7 @@ function App() {
       const currentMinute = currentDate.getMinutes();
       const currentSecond = currentDate.getSeconds();
       const targetDay = 5;
-      const targetHour = 16;
+      const targetHour = 15;
 
       let daysRemaining = targetDay - currentDay;
       let hoursRemaining = targetHour - currentHour;
