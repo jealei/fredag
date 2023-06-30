@@ -1,5 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
 import "./App.css";
+import Confetti from "react-confetti";
 
 function App() {
   const [currentYear, setCurrentYear] = useState(2023);
@@ -82,7 +83,14 @@ function App() {
     <Fragment>
       <div className="container">
         <h1 className="title">Er det helg?</h1>
-        {isWeekend ? <p className="yes">Ja!</p> : <p className="no">Nei</p>}
+        {isWeekend ? (
+          <Fragment>
+            <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} />
+            <p className="yes">Ja!</p>
+          </Fragment>
+        ) : (
+          <p className="no">Nei</p>
+        )}
         {!isWeekend && (
           <div className="countdown">
             <p className="countdown-text">Det er helg om:</p>
