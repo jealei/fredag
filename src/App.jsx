@@ -1,6 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import "./App.css";
 import Confetti from "react-confetti";
+import shop from "./assets/shop.png";
 
 function App() {
   const [currentYear, setCurrentYear] = useState(2023);
@@ -11,7 +12,7 @@ function App() {
     const currentDate = Date.now();
     const currentDay = new Date(currentDate).getDay();
     const currentHour = new Date(currentDate).getHours();
-    const currentYear = new Date(currentDate).getFullYear();
+    //const currentYear = new Date(currentDate).getFullYear();
     const currentMinute = new Date(currentDate).getMinutes();
     const currentSecond = new Date(currentDate).getSeconds();
     const targetDay = 5;
@@ -131,7 +132,7 @@ function App() {
         )}
 
         <iframe
-          src="https://open.spotify.com/embed/track/3bG958Squr4C0ZaSXqtRSU?utm_source=generator"
+          src="https://open.spotify.com/embed/track/5tKRAf2BbJnqDwdAsmuUb4?utm_source=generator"
           width="100%"
           height="352"
           frameBorder="0"
@@ -139,18 +140,39 @@ function App() {
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
         ></iframe>
-        <p className="ad">Eller sjekke ut siste musikkvideo!</p>
+        <p className="ad">Eller sjekke ut en våre vidoer fra Bloc Sessions!</p>
 
         <div className="video-container">
           <iframe
             width="448"
             height="252"
-            src="https://www.youtube.com/embed/UeGjhDvrAKk"
+            src="https://www.youtube.com/embed/mZhrRlYIM_U"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
         </div>
+
+        {isWeekend ? (
+          <p className="ad">
+            Start helgen med stil kjøp{" "}
+            <a href="https://merch.ramonasteaparty.com/" target="_blank" rel="noreferrer">
+              merch
+            </a>{" "}
+            nå!
+          </p>
+        ) : (
+          <p className="ad">
+            Unn deg litt{" "}
+            <a href="https://merch.ramonasteaparty.com/" target="_blank" rel="noreferrer">
+              merch
+            </a>
+            , så har du noe ekstra å glede deg til!
+          </p>
+        )}
+        <a href="https://merch.ramonasteaparty.com/" target="_blank" rel="noreferrer">
+          <img src={shop} alt="shop" className="banner" />
+        </a>
       </div>
 
       <footer className="footer">
