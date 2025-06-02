@@ -126,17 +126,18 @@ function App() {
           </div>
         )}
         {isWeekend ? (
-          <p className="ad">Og du kan starte helgen med å høre Ramona's Tea Party sin nye singel!</p>
+          <p className="ad">Og du kan starte helgen med å høre på Ramona's Tea Party sitt nye album!</p>
         ) : (
-          <p className="ad">I mellomtiden kan du høre Ramona's Tea Party sin nye singel mens du venter!</p>
+          <p className="ad">I mellomtiden kan du høre på Ramona's Tea Party sitt nye album mens du venter!</p>
         )}
 
         <iframe
-          src="https://open.spotify.com/embed/track/5tKRAf2BbJnqDwdAsmuUb4?utm_source=generator"
+          style={{ borderRadius: "12px" }}
+          src="https://open.spotify.com/embed/album/6TWbgRVDExw1SVhKuRfBFy?utm_source=generator"
           width="100%"
           height="352"
           frameBorder="0"
-          allowFullscreen=""
+          allowfullscreen=""
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
         ></iframe>
